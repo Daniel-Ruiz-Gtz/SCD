@@ -1,1 +1,2 @@
 # SCD
+El uso de redes locales y globales ha venido incrementando con cada año, aunado al hecho de que cada nuevo dispositivo tecnológico tiene la capacidad de conectarse a la red de redes. Todo eso gracias al poder de los sistemas distribuidos, los cuales proporcionan a los usuarios transparencia a la ahora de hacer procesamiento computacional y a los ingenieros un área para la innovación e implementación de servicios.
