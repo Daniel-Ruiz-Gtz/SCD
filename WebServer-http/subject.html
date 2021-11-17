@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WebServer - Promedio Materia</title>
+    </head>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            max-width: 1440px;
+            min-height: 100vh;
+
+            margin: auto;
+            color: #323232;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .container {
+            width: 1000px;
+            height: 350px;
+            padding: 20px;
+            display: flex;
+            border-radius: 3px;
+            border: 1px solid #dadada;
+        }
+
+        h1 {
+            font-size: 41px;
+            font-weight: 300;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 300;
+        }
+
+        #form {
+            width: 500px;
+            padding: 20px;
+            display: flex;
+            margin-right: 10px;
+            flex-direction: column;
+            border: 1px solid #dadada;
+        }
+
+        #subject {
+            padding: 10px;
+            margin: 10px 0;
+            line-height: 1.6;
+            border-radius: 2px;
+            border: 1px solid #dadada;
+        }
+
+        #submit {
+            color: #323232;
+            padding: 10px 0;
+            font-size: 18px;
+            border-radius: 2px;
+            background-color: white;
+            border: 1px solid #dadada;
+        }
+
+        #submit:hover {
+            color: white;
+            cursor: pointer;
+            background-color: black;
+            transition: background-color 1s ease-out;
+        }
+
+        .content {
+            width: 500px;
+            padding: 20px;
+            border: 1px solid #dadada;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .link {
+            padding: 10px;
+            color: #323232;
+            font-size: 18px;
+            border-radius: 2px;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid #dadada;
+            transition: color 0.5s ease-in-out;
+        }
+
+        .link:hover {
+            color: #42A5F5;
+            cursor: pointer;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <form id="form" action="/subject" method="POST">
+                <h1>Promedio Materia 👨🏻‍🏫👩🏼‍🏫‍</h1>
+                <label for="subject" id="student-label">Estudiante</label>
+                <input id="subject" type="text" placeholder="Ejemplo: ED" name="subject" required />
+                <input id="submit" type="submit" value="Enviar" />
+            </form>
+            <div class="content">
+                <h2>Promedio de la Materia: %s</h2>
+                <a class="link" href="/form">Regresar</a>
+            </div>
+        </div>
+    </body>
+</html>

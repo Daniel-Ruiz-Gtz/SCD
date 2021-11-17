@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>%s</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/slate/bootstrap.min.css" integrity="sha384-8iuq0iaMHpnH2vSyvZMSIqQuUnQA7QM+f6srIdlgBrTSEyd//AWNMyEaSF2yPzNQ" crossorigin="anonymous">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+        <link rel="shortcut icon" href="https://i.ibb.co/3ybmbZw/logo.png">
+    </head>
+    <body>
+    <main>
+        <div class="container py-4">
+            <header class="pb-3 mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center text-white text-decoration-none">
+                    <h1 class="fw-bold">%s</h1>
+                </a>
+            </header>
+            <main>
+                <div class="mb-3">
+                    <label for="sender" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="sender" placeholder="Tu nombre">
+                </div>
+                <div id="chatbox" class="p-5 mb-3 bg-light border text-white text-center bg-dark rounded">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control mb-3" id="content" placeholder="Escribe un mensaje...">
+                    <button id="send_message_btn" class="btn btn-primary btn-block" type="button">Enviar mensaje
+                    </button>
+                </div>
+            </main>
+            <footer class="pt-3 mt-4 text-muted border-top">
+                Ruiz Gutierrez Daniel de la Cruz - Sistemas Concurrentes y Distribuidos &copy; 2021
+            </footer>
+        </div>
+    </main>
+    <script>
+        let sendMsgButton = document.getElementById("send_message_btn");
+        sendMsgButton.addEventListener('click', function () {
+            let sender = document.getElementById("sender")
+            let content =  document.getElementById("content");
+            if (sender.value === '') {
+                window.alert("Selecciona un nombre de usuario");
+                return;
+            }
+            if (content.value === '') {
+                window.alert("Escribe algo antes de mandar un mensaje");
+                return;
+            }
+            axios.post('/chat', {
+                sender: sender.value,
+                content: content.value
+            }).then((response) => {
+                content.value = '';
+            }, (error) => {
+                console.log(error);
+            })
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            getMessages();
+        });
+
+        function getMessages() {
+            let sender = document.getElementById('sender').value;
+            axios.get('/chat')
+                .then((response) => {
+                    let messages = '';
+                    for (let msg of response.data) {
+                        if (msg.sender === sender)
+                            messages += generateMessage(msg, true);
+                        else
+                            messages += generateMessage(msg);
+                    }
+                    $('#chatbox').empty();
+                    $('#chatbox').append(messages)
+                })
+            setTimeout(getMessages, 1000);
+        }
+
+        function generateMessage(msg, own = false) {
+            if (own) return `<div class="d-flex align-items-center text-right justify-content-end">
+                        <div><span>${msg.sender}</span>
+                            <p class="mt-2 bg-primary text-white rounded pl-3 pr-3 pt-2 pb-2">${msg.content}</p>
+                        </div>
+                    </div>`;
+
+            return `<div class="d-flex align-items-center text-left">
+                        <div><span>${msg.sender}</span>
+                            <p class="mt-2 bg-light text-dark rounded pl-3 pr-3 pt-2 pb-2">${msg.content}</p>
+                        </div>
+                    </div>`;
+        }
+    </script>
+    </body>
+</html>

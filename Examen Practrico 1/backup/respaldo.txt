@@ -1,0 +1,9 @@
+Daniel se ha conectado.
+Ali se ha conectado.
+Mushu se ha conectado.
+Daniel escribió: Hola a todos
+Mushu escribió: Hola Daniel
+Ali escribió: Como estan?
+Daniel envió el archivo: test.txt
+Mushu envió el archivo: test2.txt
+ 
